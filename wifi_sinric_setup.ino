@@ -34,12 +34,22 @@ void sendStateEvent(bool state){
 void setupSinricPro() {
   // get a new Light device from SinricPro
   SinricProLight &myLight = SinricPro[LIGHT_ID];
-  
-  // set callback function to device
+
+  // set callback function to light
   myLight.onPowerState(onPowerState);
   myLight.onBrightness(onBrightness);
   myLight.onColorTemperature(onColorTemperature);
   myLight.onColor(onColor);
+
+  // get a new Light device from SinricPro
+  SinricProTV &myTV = SinricPro[TV_ID];
+
+  // set callback functions to tv
+  myTV.onPowerState(onPowerState_tv);
+  myTV.onChangeChannelNumber(onChangeChannelNumber);
+  myTV.onAdjustVolume(onAdjustVolume);
+  myTV.onMute(onMute);
+  myTV.onSelectInput(onSelectInput);
   
   // setup SinricPro
   SinricPro.onConnected([](){ Serial.printf("Connected to SinricPro\r\n"); }); 
